@@ -1,6 +1,13 @@
-
+% clear;
+% clc;
+% 
+% load('..\mlop_data_voxel_wise.mat')
 
 A = [-1*D_T;D_O1;D_O2;D_O3;D_O4];
+% zero_ids = find(sum(A, 1) == 0);
+% nzero_ids = setdiff(1:size(A,2), zero_ids);
+% A = A(:,nzero_ids);
+
 col = size(A,2);
 n = size(A,1);
 nt = size(D_T,1);
@@ -9,19 +16,19 @@ zt(1:nt) =-1;
 A = [A zt];
 zo1 = zeros(n,1);
 no1 = size(D_O1,1);
-zo1(nt+1:no1) = -1;
+zo1(nt+1:nt+no1) = -1;
 
 zo2 = zeros(n,1);
 no2 = size(D_O2,1);
-zo2(no1+1:no2) = -1;
+zo2(nt+no1+1:nt+no1+no2) = -1;
 
 zo3 = zeros(n,1);
 no3 = size(D_O3,1);
-zo1(no2+1:no3) = -1;
+zo1(nt+no1+no2+1:nt+no1+no2+no3) = -1;
 
 zo4 = zeros(n,1);
 no4 = size(D_O4,1);
-zo1(no3+1:no4) = -1;
+zo1(nt+no1+no2+no3+1:nt+no1+no2+no3+no4) = -1;
 
 A = [A zo1 zo2 zo3 zo4];
 

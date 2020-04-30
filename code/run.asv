@@ -40,7 +40,7 @@ dze = 2*EZ/Nz; % Range along z-axis is 4
 % d_thresh = sqrt(2)/2.81; % Based on the collimator resolution. 
 
 %% Initialization: Properties
-[F, ALPH_N, ALPH_O, ALPH_T, mu_n, mu_o, mu_t, s_n, s_o, d_T] = dialogue_box();
+[F, alpha_n, alpha_o, alpha_t, mu_n, mu_o, mu_t, s_n, s_o, d_T] = dialogue_box();
 % F = 10;
 % ALPH_T = 0.7;
 % ALPH_N = 0.1;
