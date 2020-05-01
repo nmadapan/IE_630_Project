@@ -119,11 +119,10 @@ save('mlop_data', 'D_N1', 'D_N2', 'D_N3', 'D_N4', 'D_O1', 'D_O2', ...
 
 %% Plot all of them together
 figure;
-imagesc(X_x + X_xy + X_y + X_mxy)
+imagesc(X_x + flipud(X_xy) + X_y + fliplr(X_mxy))
 xlabel('X - direction', 'FontSize', 14)
 ylabel('Y - direction', 'FontSize', 14)
 colorbar;
-colormap hot;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function D = return_dmat(flag1, flag2)

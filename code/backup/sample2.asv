@@ -31,15 +31,12 @@ P_xy = P;
 indices_xy = indices;
 in_tumor_flags_xy = in_tumor_flags;
 in_normal_flags_xy = in_normal_flags;
-in_oar_flags_xy = in_oar_flags;
+in_oar_flags_x = in_oar_flags;
 
 load('..\data_mxy.mat', 'intensity_list', 'P', 'indices', 'xe_pts', 'ye_pts', 'ze_pts', 'in_tumor_flags', 'in_oar_flags', 'in_normal_flags')
 intensity_list_mxy = intensity_list;
 P_mxy = P;
 indices_mxy = indices;
-in_tumor_flags_mxy = in_tumor_flags;
-in_normal_flags_mxy = in_normal_flags;
-in_oar_flags_mxy = in_oar_flags;
 
 %% Plotting
 figure;
@@ -67,11 +64,9 @@ for idx = values
    flags = P_x(:, 3) == 0;
    image_x = reshape(z1(flags), numel(xe_pts), numel(ye_pts));
    z = z + image_x + fliplr(image_x);
-   tumor_intensity = tumor_intensity + sum(z1(in_tumor_flags_x));
-   normal_intensity = normal_intensity + sum(z1(in_normal_flags_x));
-   oar_intensity = oar_intensity + sum(z1(in_oar_flags_x));
+   tumor_intensity = tumor_intensity + intensity_list_x()
    
-   % y direction
+   % xy direction
    t_fl = indices_y == 0;
    indices_y(t_fl) = 1;
    z2 = intensity_list_y .* y2(indices_y);
@@ -79,11 +74,7 @@ for idx = values
    flags = P_y(:, 3) == 0;
    image_y = reshape(z2(flags), numel(xe_pts), numel(ye_pts));
    z = z + image_y + flipud(image_y);
-   tumor_intensity = tumor_intensity + sum(z2(in_tumor_flags_y));
-   normal_intensity = normal_intensity + sum(z2(in_normal_flags_y));
-   oar_intensity = oar_intensity + sum(z2(in_oar_flags_y));
 
-   % xy direction
    t_fl = indices_xy == 0;
    indices_xy(t_fl) = 1;
    z3 = intensity_list_xy .* y3(indices_xy);
@@ -91,9 +82,6 @@ for idx = values
    flags = P_xy(:, 3) == 0;
    image_xy = reshape(z3(flags), numel(xe_pts), numel(ye_pts));
    z = z + image_xy + flipud(image_xy);
-   tumor_intensity = tumor_intensity + sum(z3(in_tumor_flags_xy));
-   normal_intensity = normal_intensity + sum(z3(in_normal_flags_xy));
-   oar_intensity = oar_intensity + sum(z3(in_oar_flags_xy));
 
    t_fl = indices_mxy == 0;
    indices_mxy(t_fl) = 1;
@@ -102,15 +90,10 @@ for idx = values
    flags = P_mxy(:, 3) == 0;
    image_mxy = reshape(z4(flags), numel(xe_pts), numel(ye_pts));
    z = z + image_mxy + flipud(image_mxy);
-   tumor_intensity = tumor_intensity + sum(z4(in_tumor_flags_mxy));
-   normal_intensity = normal_intensity + sum(z4(in_normal_flags_mxy));
-   oar_intensity = oar_intensity + sum(z4(in_oar_flags_mxy));
    
    imagesc(z);
    colorbar;   
-   fprintf('Tumor: %.02f\n', tumor_intensity)
-   fprintf('Normal: %.02f\n', normal_intensity)
-   fprintf('OAR: %.02f\n\n', oar_intensity)
+   colormap hot;
    
 %    z_min = min(z(:)); z_max = max(z(:));
 %    z_scaled = uint8(255 * (z - z_min) ./ (z_max - z_min));

@@ -11,7 +11,20 @@ close all;
 clc;
 
 %% CHANGE THESE VARIABLES
-DIRECTION = 'mxy'; % Collimator direction
+[F, ALPH_N, ALPH_O, ALPH_T, mu_n, mu_o, mu_t, s_n, s_o, d_T] = dialogue_box();
+
+initialize_imrt('x', F, ALPH_N, ALPH_O, ALPH_T)
+initialize_imrt('xy', F, ALPH_N, ALPH_O, ALPH_T)
+initialize_imrt('y', F, ALPH_N, ALPH_O, ALPH_T)
+initialize_imrt('mxy', F, ALPH_N, ALPH_O, ALPH_T)
+
+create_lp_matrices()
+
+close all;
+
+function initialize_imrt(DIRECTION, F, ALPH_N, ALPH_O, ALPH_T)
+DIRECTION
+
 WITH_AREA = true; % If true, it will compute Joules/sec, otherwise, Joules/m^2/sec
 
 %% Initialization: Collimator
@@ -40,7 +53,6 @@ dze = 2*EZ/Nz; % Range along z-axis is 4
 % d_thresh = sqrt(2)/2.81; % Based on the collimator resolution. 
 
 %% Initialization: Properties
-[F, alpha_n, alpha_o, alpha_t, mu_n, mu_o, mu_t, s_n, s_o, d_T] = dialogue_box();
 % F = 10;
 % ALPH_T = 0.7;
 % ALPH_N = 0.1;
@@ -309,13 +321,7 @@ if(WITH_AREA)
     intensity_list = UNIT_AREA * intensity_list;
 end
 
-dir_name = ['data_', num2str(N)];
-try
-   mkdir(dir_name)
-catch exp 
-end
-
-mat_fname = fullfile(dir_name, ['data_', DIRECTION]);
+mat_fname = ['data_', DIRECTION];
 % assignin('base', [DIRECTION, '_indices'], indices);
 save(mat_fname, 'indices', 'intensity_list', 'in_normal_flags', ...
     'in_eps_flags', 'in_tumor_flags', 'in_oar_flags', 'yc_pts', 'zc_pts', ...
@@ -347,6 +353,8 @@ dV = dxe * dye * dze;
 fprintf('### Tumor sanity check ###\n')
 fprintf('Real volume: %.02f\n', pi * 4 / 3)
 fprintf('Est. volume: %.02f\n', sum(in_tumor_flags) * dV)
+
+end
 
 function [in_flags, indices] = where_in_collimator(V, yr, zr)
     %%%%%%%%%%%%%%%%%%%%
