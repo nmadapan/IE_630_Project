@@ -45,7 +45,7 @@ in_oar_flags_mxy = in_oar_flags;
 figure;
 clims = [0, 3];
 x = x(:, 1:100);
-values = [8, 10, 17, 22];
+values = [66, 60, 61, 45];
 for idx = values
    idx
    y = x(idx, :) ;
@@ -95,6 +95,7 @@ for idx = values
    normal_intensity = normal_intensity + sum(z3(in_normal_flags_xy));
    oar_intensity = oar_intensity + sum(z3(in_oar_flags_xy));
 
+   % mxy direction
    t_fl = indices_mxy == 0;
    indices_mxy(t_fl) = 1;
    z4 = intensity_list_mxy .* y4(indices_mxy);
@@ -112,14 +113,7 @@ for idx = values
    fprintf('Normal: %.02f\n', normal_intensity)
    fprintf('OAR: %.02f\n\n', oar_intensity)
    
-%    z_min = min(z(:)); z_max = max(z(:));
-%    z_scaled = uint8(255 * (z - z_min) ./ (z_max - z_min));
-
-%    z_scaled = ind2rgb(im2uint8(mat2gray(z)), parula(256));
-%    z_scaled = imresize(z_scaled, 25);
-
    wfname = fullfile('results', ['img_', num2str(idx), '.png']);
-%    imwrite(z_scaled, wfname)
    saveas(gcf, wfname)
    
 %    pause(0.5)

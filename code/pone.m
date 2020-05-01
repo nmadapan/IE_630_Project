@@ -68,6 +68,11 @@
 % nc = size(A,1);
 % I = eye(nc);
 % I(1:nt,:) =-1*I(1:nt,:);
+
+% clear;
+% clc;
+% load('mlop_data')
+
 bo1 = 0.1*20.1*0.001*(4/3)* pi * (1*0.5*2)
 bo2 = 0.1*20.1*0.001*(4/3) * pi * (0.5*0.5*0.5)
 bo3 = 0.1*20.1*0.001*(4/3) * pi * (0.5*(1/3)*0.25)
@@ -172,10 +177,10 @@ while o==0
         
     else 
         if(T(1,end)<1e-6)  %similar to T(1,end)==0, but only till 10^-6.
-            disp("LP is Feasible"); %check for feasibility, cost=0 at the end of phase 1.
+            disp('LP is Feasible'); %check for feasibility, cost=0 at the end of phase 1.
             f=1;
         else
-            disp("LP is not Feasible");
+            disp('LP is not Feasible');
             f=0;
         end
         
@@ -191,9 +196,9 @@ function [T,B] = red_remove(T,B,m,n)
 art = n+1:m+n;
 k = ismember(B,art);
 if k==0
-    disp("No redundant Constraints");
+    disp('No redundant Constraints');
 else
-    disp("Redundant Constraints found");
+    disp('Redundant Constraints found');
     
     l = find(k==1);
     for dum=1:length(l)
@@ -210,7 +215,7 @@ else
             [T,B] = pivot(T,index,B);
         end
     end
-    disp("Redundant Constraints Removed");
+    disp('Redundant Constraints Removed');
     disp(T);disp(B);
 end
 
@@ -237,12 +242,12 @@ while o==0
     if o==0
         [index,u] = findpivot_ptwo(T,B); %findpivot_ptwo() returns the index of the pivot element
         if u==1                          %It also checks if the problem is unbounded, if unbounded, 
-            disp("Unbounded Problem");   %it returns u=1.
+            disp('Unbounded Problem');   %it returns u=1.
             return;
         end
         [T,B] = pivot(T,index,B);
     else
-        disp("Optimal Solution found.") %when tableau is optimal
+        disp('Optimal Solution found.') %when tableau is optimal
         
     end
 end
@@ -258,9 +263,9 @@ for k = B
     i = find(k==B(:));
     x(k) = T(i+1,end);
 end
-disp("Optimal Cost:");  %optimal cost
+disp('Optimal Cost:');  %optimal cost
 disp(o_c);
-disp("solution:");      %optimal x value
+disp('solution:');      %optimal x value
 disp(x);
 end
 
