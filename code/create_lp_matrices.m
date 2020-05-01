@@ -17,6 +17,7 @@ imagesc(X_x)
 xlabel('X - direction', 'FontSize', 14)
 ylabel('Y - direction', 'FontSize', 14)
 colorbar;
+colormap hot;
 
 % D matrix for normal tissue
 D_N1 = return_dmat(in_normal_flags, in_col_flags);
@@ -42,6 +43,7 @@ imagesc(X_xy)
 xlabel('X - direction', 'FontSize', 14)
 ylabel('Y - direction', 'FontSize', 14)
 colorbar;
+colormap hot;
 
 % D matrix for normal tissue
 D_N2 = return_dmat(in_normal_flags, in_col_flags);
@@ -68,6 +70,7 @@ imagesc(X_y)
 xlabel('X - direction', 'FontSize', 14)
 ylabel('Y - direction', 'FontSize', 14)
 colorbar;
+colormap hot;
 
 % D matrix for normal tissue
 D_N3 = return_dmat(in_normal_flags, in_col_flags);
@@ -94,6 +97,7 @@ imagesc(X_mxy)
 xlabel('X - direction', 'FontSize', 14)
 ylabel('Y - direction', 'FontSize', 14)
 colorbar;
+colormap hot;
 
 % D matrix for normal tissue
 D_N4 = return_dmat(in_normal_flags, in_col_flags);
