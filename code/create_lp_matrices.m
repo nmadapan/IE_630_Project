@@ -14,6 +14,8 @@ flags = z == 0;
 X = reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts));
 figure;
 imagesc(X)
+xlabel('X - direction', 'FontSize', 14)
+ylabel('Y - direction', 'FontSize', 14)
 colorbar;
 
 % D matrix for normal tissue
@@ -36,7 +38,9 @@ z = P(:, 3);
 flags = z == 0;
 X = reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts));
 figure;
-imagesc(X)
+imagesc(flipud(X))
+xlabel('X - direction', 'FontSize', 14)
+ylabel('Y - direction', 'FontSize', 14)
 colorbar;
 
 % D matrix for normal tissue
@@ -60,7 +64,9 @@ z = P(:, 3);
 flags = z == 0;
 X = reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts));
 figure;
-imagesc(X)
+imagesc(flipud(X))
+xlabel('X - direction', 'FontSize', 14)
+ylabel('Y - direction', 'FontSize', 14)
 colorbar;
 
 % D matrix for normal tissue
@@ -84,7 +90,9 @@ z = P(:, 3);
 flags = z == 0;
 X = reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts));
 figure;
-imagesc(X)
+imagesc(flipud(X))
+xlabel('X - direction', 'FontSize', 14)
+ylabel('Y - direction', 'FontSize', 14)
 colorbar;
 
 % D matrix for normal tissue

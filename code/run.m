@@ -40,11 +40,11 @@ dze = 2*EZ/Nz; % Range along z-axis is 4
 % d_thresh = sqrt(2)/2.81; % Based on the collimator resolution. 
 
 %% Initialization: Properties
-[F, ALPH_N, ALPH_O, ALPH_T, mu_n, mu_o, mu_t, s_n, s_o, d_T] = dialogue_box();
-% F = 10;
-% ALPH_T = 0.7;
-% ALPH_N = 0.1;
-% ALPH_O = 0.15;
+% [F, ALPH_N, ALPH_O, ALPH_T, mu_n, mu_o, mu_t, s_n, s_o, d_T] = dialogue_box();
+F = 10;
+ALPH_T = 0.7;
+ALPH_N = 0.1;
+ALPH_O = 0.15;
 COUNT = 0;
 
 assert(any(strcmp({'x', 'y', 'xy', 'mxy'}, DIRECTION)), ...
@@ -325,6 +325,7 @@ flags = P(:, 3) == 0;
 figure;
 imagesc(reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts)))
 colorbar;
+colormap gray;
 
 real_vol = (pi * EX * EY * 2 * EZ);
 est_vol = sum(in_eps_flags) * dxe * dye * dze;
