@@ -11,9 +11,9 @@ N_coll = numel(yc_pts) * numel(zc_pts);
 % Plot the heatmap
 z = P(:, 3);
 flags = z == 0;
-X = reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts));
+X_x = reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts));
 figure;
-imagesc(X)
+imagesc(X_x)
 xlabel('X - direction', 'FontSize', 14)
 ylabel('Y - direction', 'FontSize', 14)
 colorbar;
@@ -36,9 +36,9 @@ N_coll = numel(yc_pts) * numel(zc_pts);
 % Plot the heatmap
 z = P(:, 3);
 flags = z == 0;
-X = reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts));
+X_xy = flipud(reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts)));
 figure;
-imagesc(flipud(X))
+imagesc(X_xy)
 xlabel('X - direction', 'FontSize', 14)
 ylabel('Y - direction', 'FontSize', 14)
 colorbar;
@@ -62,9 +62,9 @@ N_coll = numel(yc_pts) * numel(zc_pts);
 % Plot the heatmap
 z = P(:, 3);
 flags = z == 0;
-X = reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts));
+X_y = flipud(reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts)));
 figure;
-imagesc(flipud(X))
+imagesc(X_y)
 xlabel('X - direction', 'FontSize', 14)
 ylabel('Y - direction', 'FontSize', 14)
 colorbar;
@@ -88,9 +88,9 @@ N_coll = numel(yc_pts) * numel(zc_pts);
 % Plot the heatmap
 z = P(:, 3);
 flags = z == 0;
-X = reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts));
+X_mxy = flipud(reshape(intensity_list(flags), numel(xe_pts), numel(ye_pts)));
 figure;
-imagesc(flipud(X))
+imagesc(X_mxy)
 xlabel('X - direction', 'FontSize', 14)
 ylabel('Y - direction', 'FontSize', 14)
 colorbar;
@@ -116,6 +116,14 @@ C_O = Dt_O1 + Dt_O2 + Dt_O3;
 save('mlop_data', 'D_N1', 'D_N2', 'D_N3', 'D_N4', 'D_O1', 'D_O2', ...
      'D_O3', 'D_O4', 'D_T', 'Dt_N1', 'Dt_N2', 'Dt_N3', 'Dt_N4', 'Dt_O1', ...
      'Dt_O2', 'Dt_O3', 'Dt_O4', 'Dt_T', 'C_N', 'C_O');
+
+%% Plot all of them together
+figure;
+imagesc(X_x + X_xy + X_y + X_mxy)
+xlabel('X - direction', 'FontSize', 14)
+ylabel('Y - direction', 'FontSize', 14)
+colorbar;
+colormap hot;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function D = return_dmat(flag1, flag2)
